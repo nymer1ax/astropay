@@ -2,6 +2,7 @@ package co.com.astropay.usecase.getallpost;
 
 import co.com.astropay.model.post.Post;
 import co.com.astropay.model.post.gateways.PostRepository;
+import co.com.astropay.usecase.exceptions.custom.NoContentException;
 import co.com.astropay.usecase.getallposttitle.GetAllPostTitleUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -14,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,6 +62,17 @@ class GetAllPostUseCaseTest {
 
         Assertions.assertEquals(postList.size(), result.size());
         Assertions.assertEquals(postList.get(0).getTitle(), result.get(0).getTitle());
+    }
+
+    @Test
+    public void testException() throws IOException {
+        List<Post> postList = Collections.emptyList();
+        Mockito.when(postRepository.getAll()).thenReturn(postList);
+        Exception ex = Assertions.assertThrows(
+                NoContentException.class, ()->{ getAllPostUseCase.getAll(Optional.empty());
+        });
+        Assertions.assertNotNull(ex.getMessage());
+        Assertions.assertEquals("No existen datos asociados a esta busqueda", ex.getMessage());
     }
 
 
