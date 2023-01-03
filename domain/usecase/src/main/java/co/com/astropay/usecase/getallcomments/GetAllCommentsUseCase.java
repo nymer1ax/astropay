@@ -2,6 +2,7 @@ package co.com.astropay.usecase.getallcomments;
 
 import co.com.astropay.model.comments.Comments;
 import co.com.astropay.model.comments.gateways.CommentsRepository;
+import co.com.astropay.usecase.exceptions.custom.NoContentException;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class GetAllCommentsUseCase {
     public List<Comments> commentsList(int postId) throws IOException {
         List<Comments> comments = commentsRepository.getAll(postId);
         if(comments.isEmpty()){
-            throw new RuntimeException("No hay contenido");
+            throw new NoContentException("No existen datos asociados a esta busqueda");
         }
         return comments;
     }

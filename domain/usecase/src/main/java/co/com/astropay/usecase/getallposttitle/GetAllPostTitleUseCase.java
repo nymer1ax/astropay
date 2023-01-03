@@ -2,6 +2,8 @@ package co.com.astropay.usecase.getallposttitle;
 
 import co.com.astropay.model.post.Post;
 import co.com.astropay.model.post.gateways.PostRepository;
+import co.com.astropay.usecase.exceptions.custom.BadRequestException;
+import co.com.astropay.usecase.exceptions.custom.NoContentException;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
@@ -17,17 +19,17 @@ public class GetAllPostTitleUseCase {
         List<Post> posts = postRepository.getAll();
 
         if(posts.isEmpty()){
-            throw new RuntimeException("No existen posts");
+            throw new NoContentException("No existen datos asociados a esta busqueda");
         }
 
         if(title.isBlank() || title == null){
-            throw new RuntimeException("No se ingreso contenido");
+            throw new BadRequestException("No se ingreso el nombre del titulo correctamente.");
         }
 
        List<Post> filtered = posts.stream().filter(p -> p.getTitle().contains(title)).collect(Collectors.toList());
 
         if(filtered.isEmpty()){
-            throw new RuntimeException("No ha concidido tu busqueda");
+            throw new NoContentException("No existen datos asociados a esta busqueda");
         }
 
         return filtered;

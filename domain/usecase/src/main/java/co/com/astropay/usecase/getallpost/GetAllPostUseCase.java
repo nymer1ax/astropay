@@ -2,6 +2,7 @@ package co.com.astropay.usecase.getallpost;
 
 import co.com.astropay.model.post.Post;
 import co.com.astropay.model.post.gateways.PostRepository;
+import co.com.astropay.usecase.exceptions.custom.NoContentException;
 import co.com.astropay.usecase.getallposttitle.GetAllPostTitleUseCase;
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +25,7 @@ public class GetAllPostUseCase {
         List<Post> posts = postRepository.getAll();
 
         if(posts.isEmpty()){
-            throw new RuntimeException("No hay contenido");
+            throw new NoContentException("No existen datos asociados a esta busqueda");
         }
 
         return posts;

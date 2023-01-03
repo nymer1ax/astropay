@@ -2,6 +2,7 @@ package co.com.astropay.usecase.getpostbyid;
 
 import co.com.astropay.model.post.Post;
 import co.com.astropay.model.post.gateways.PostRepository;
+import co.com.astropay.usecase.exceptions.custom.NoContentException;
 import lombok.RequiredArgsConstructor;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ public class GetPostByIdUseCase {
         Post post = postRepository.getById(id);
 
         if(post == null){
-            throw new RuntimeException("No hay contenido");
+            throw new NoContentException("No existen datos asociados a esta busqueda");
         }
         return post;
     }
