@@ -1,6 +1,9 @@
 package co.com.astropay.api;
+import co.com.astropay.model.comments.Comments;
 import co.com.astropay.model.post.Post;
+import co.com.astropay.usecase.getallcomments.GetAllCommentsUseCase;
 import co.com.astropay.usecase.getallpost.GetAllPostUseCase;
+import co.com.astropay.usecase.getallposttitle.GetAllPostTitleUseCase;
 import co.com.astropay.usecase.getpostbyid.GetPostByIdUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
@@ -20,6 +23,10 @@ public class ApiRest {
 
    private final GetPostByIdUseCase getPostByIdUseCase;
 
+   private final GetAllCommentsUseCase getAllCommentsUseCase;
+
+   private final GetAllPostTitleUseCase getAllPostTitleUseCase;
+
     @GetMapping(path = "/posts")
     public List<Post> getAll() throws IOException {
         return getAllPostUseCase.getAll();
@@ -30,5 +37,15 @@ public class ApiRest {
         return getPostByIdUseCase.getById(id);
     }
 
-    
+    @GetMapping(path = "/posts/{id}/comments")
+    public List<Comments> getPostComments(@PathVariable(name = "id") int id) throws IOException {
+        return getAllCommentsUseCase.commentsList(id);
+    }
+
+    @GetMapping(path = "/posts/{id}/comments")
+    public List<Post> getPostFilteredByTitle(@PathVariable(name = "title") String title) throws IOException {
+        return getAllPostTitleUseCase.getAllFilterByTitle(title);
+    }
+
+
 }
