@@ -7,13 +7,11 @@ import co.com.astropay.usecase.getallposttitle.GetAllPostTitleUseCase;
 import co.com.astropay.usecase.getpostbyid.GetPostByIdUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -25,11 +23,10 @@ public class ApiRest {
 
    private final GetAllCommentsUseCase getAllCommentsUseCase;
 
-   private final GetAllPostTitleUseCase getAllPostTitleUseCase;
 
     @GetMapping(path = "/posts")
-    public List<Post> getAll() throws IOException {
-        return getAllPostUseCase.getAll();
+    public List<Post> getAll(@RequestParam(name = "title", required = false) Optional<String> title) throws IOException {
+        return getAllPostUseCase.getAll(title);
     }
 
     @GetMapping(path = "/posts/{id}")
@@ -42,10 +39,7 @@ public class ApiRest {
         return getAllCommentsUseCase.commentsList(id);
     }
 
-    @GetMapping(path = "/posts/{title}")
-    public List<Post> getPostFilteredByTitle(@PathVariable(name = "title") String title) throws IOException {
-        return getAllPostTitleUseCase.getAllFilterByTitle(title);
-    }
+
 
 
 }

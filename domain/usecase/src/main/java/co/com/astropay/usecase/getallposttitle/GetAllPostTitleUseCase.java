@@ -13,10 +13,15 @@ public class GetAllPostTitleUseCase {
     private final PostRepository postRepository;
 
     public List<Post> getAllFilterByTitle(String title) throws IOException {
+
         List<Post> posts = postRepository.getAll();
 
         if(posts.isEmpty()){
             throw new RuntimeException("No existen posts");
+        }
+
+        if(title.isBlank() || title == null){
+            throw new RuntimeException("No se ingreso contenido");
         }
 
        List<Post> filtered = posts.stream().filter(p -> p.getTitle().contains(title)).collect(Collectors.toList());
