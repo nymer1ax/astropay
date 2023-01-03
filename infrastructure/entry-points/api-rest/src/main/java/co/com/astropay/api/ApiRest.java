@@ -42,7 +42,7 @@ public class ApiRest {
         return getAllCommentsUseCase.commentsList(id);
     }
 
-    @GetMapping(path = "/posts/{id}/comments")
+    @GetMapping(path = "/posts/{title}")
     public List<Post> getPostFilteredByTitle(@PathVariable(name = "title") String title) throws IOException {
         return getAllPostTitleUseCase.getAllFilterByTitle(title);
     }
