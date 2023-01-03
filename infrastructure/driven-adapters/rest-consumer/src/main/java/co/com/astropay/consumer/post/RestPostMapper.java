@@ -3,8 +3,10 @@ package co.com.astropay.consumer.post;
 import co.com.astropay.model.post.Post;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,6 +26,11 @@ public class RestPostMapper {
                 throw new RuntimeException(e);
             }
         }).collect(Collectors.toList());
+    }
+
+
+    public RestPostResponse mapJsonObjectToRestResponse(JSONObject jsonpObject) throws JsonProcessingException {
+        return mapper.readValue(jsonpObject.toString(), RestPostResponse.class);
     }
 
     public Post restPostResponseToPost(RestPostResponse dto){
