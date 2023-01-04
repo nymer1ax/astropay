@@ -1,7 +1,7 @@
 package co.com.astropay.usecase.getpostbyid;
 
 import co.com.astropay.model.post.Post;
-import co.com.astropay.model.post.gateways.PostRepository;
+import co.com.astropay.model.post.gateways.PostConsumer;
 import co.com.astropay.usecase.exceptions.custom.NoContentException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import java.io.IOException;
 @MockitoSettings(strictness = Strictness.LENIENT)
 class GetPostByIdUseCaseTest {
     @Mock
-    private PostRepository postRepository;
+    private PostConsumer postRepository;
 
     @InjectMocks
     private GetPostByIdUseCase useCase;

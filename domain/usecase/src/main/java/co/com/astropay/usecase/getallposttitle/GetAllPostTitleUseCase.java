@@ -1,7 +1,7 @@
 package co.com.astropay.usecase.getallposttitle;
 
 import co.com.astropay.model.post.Post;
-import co.com.astropay.model.post.gateways.PostRepository;
+import co.com.astropay.model.post.gateways.PostConsumer;
 import co.com.astropay.usecase.exceptions.custom.BadRequestException;
 import co.com.astropay.usecase.exceptions.custom.NoContentException;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class GetAllPostTitleUseCase {
-    private final PostRepository postRepository;
+    private final PostConsumer postRepository;
 
     public List<Post> getAllFilterByTitle(String title) throws IOException {
 

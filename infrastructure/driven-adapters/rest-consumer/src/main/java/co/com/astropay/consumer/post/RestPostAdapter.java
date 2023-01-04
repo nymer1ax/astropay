@@ -1,7 +1,7 @@
 package co.com.astropay.consumer.post;
 
 import co.com.astropay.model.post.Post;
-import co.com.astropay.model.post.gateways.PostRepository;
+import co.com.astropay.model.post.gateways.PostConsumer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class RestPostAdapter implements PostRepository {
+public class RestPostAdapter implements PostConsumer {
 
     private final RestPostConsumer restPostConsumer;
     private final RestPostMapper restPostMapper;

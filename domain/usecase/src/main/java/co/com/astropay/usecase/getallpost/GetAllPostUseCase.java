@@ -1,7 +1,7 @@
 package co.com.astropay.usecase.getallpost;
 
 import co.com.astropay.model.post.Post;
-import co.com.astropay.model.post.gateways.PostRepository;
+import co.com.astropay.model.post.gateways.PostConsumer;
 import co.com.astropay.usecase.exceptions.custom.NoContentException;
 import co.com.astropay.usecase.getallposttitle.GetAllPostTitleUseCase;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 public class GetAllPostUseCase {
-    private final PostRepository postRepository;
+    private final PostConsumer postRepository;
 
     private final GetAllPostTitleUseCase getAllPostTitleUseCase;
 

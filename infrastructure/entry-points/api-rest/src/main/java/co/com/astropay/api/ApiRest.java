@@ -4,6 +4,7 @@ import co.com.astropay.model.post.Post;
 import co.com.astropay.usecase.exceptions.Response;
 import co.com.astropay.usecase.getallcomments.GetAllCommentsUseCase;
 import co.com.astropay.usecase.getallpost.GetAllPostUseCase;
+import co.com.astropay.usecase.getallpostrepo.GetAllPostRepoUseCase;
 import co.com.astropay.usecase.getallposttitle.GetAllPostTitleUseCase;
 import co.com.astropay.usecase.getpostbyid.GetPostByIdUseCase;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,8 @@ public class ApiRest {
    private final GetPostByIdUseCase getPostByIdUseCase;
 
    private final GetAllCommentsUseCase getAllCommentsUseCase;
+
+   private final GetAllPostRepoUseCase getAllPostRepoUseCase;
 
 
     @GetMapping(path = "/posts")
@@ -76,6 +79,13 @@ public class ApiRest {
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+
+    @GetMapping("/posts/persisted")
+    public List<Post> getPostPersisted(){
+        return getAllPostRepoUseCase.getallpostpersisted();
+    }
+
 
 
 

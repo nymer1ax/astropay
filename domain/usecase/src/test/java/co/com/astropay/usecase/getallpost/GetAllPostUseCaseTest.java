@@ -1,7 +1,7 @@
 package co.com.astropay.usecase.getallpost;
 
 import co.com.astropay.model.post.Post;
-import co.com.astropay.model.post.gateways.PostRepository;
+import co.com.astropay.model.post.gateways.PostConsumer;
 import co.com.astropay.usecase.exceptions.custom.NoContentException;
 import co.com.astropay.usecase.getallposttitle.GetAllPostTitleUseCase;
 import org.junit.jupiter.api.Assertions;
@@ -25,7 +25,7 @@ import java.util.Optional;
 class GetAllPostUseCaseTest {
 
     @Mock
-    private PostRepository postRepository;
+    private PostConsumer postRepository;
 
     @Mock
     private GetAllPostTitleUseCase getAllPostTitleUseCase;
